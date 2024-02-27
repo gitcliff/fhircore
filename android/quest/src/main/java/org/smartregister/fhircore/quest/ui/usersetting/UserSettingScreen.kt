@@ -17,6 +17,7 @@
 package org.smartregister.fhircore.quest.ui.usersetting
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -94,6 +95,7 @@ import org.smartregister.fhircore.engine.ui.theme.LoginDarkColor
 import org.smartregister.fhircore.engine.util.annotation.PreviewWithBackgroundExcludeGenerated
 import org.smartregister.fhircore.engine.util.extension.appVersion
 import org.smartregister.fhircore.quest.ui.pin.CIRCULAR_PROGRESS_INDICATOR
+import timber.log.Timber
 
 const val RESET_DATABASE_DIALOG = "resetDatabaseDialog"
 const val USER_SETTING_ROW_LOGOUT = "userSettingRowLogout"
@@ -148,16 +150,23 @@ fun UserSettingScreen(
   ) {
     Column(
       modifier =
-        Modifier.background(color = colorResource(id = R.color.backgroundGray))
-          .verticalScroll(rememberScrollState()),
+      Modifier
+        .background(color = colorResource(id = R.color.backgroundGray))
+        .verticalScroll(rememberScrollState()),
     ) {
       if (!username.isNullOrEmpty()) {
         Column(
-          modifier = modifier.background(Color.White).padding(vertical = 24.dp).fillMaxWidth(),
+          modifier = modifier
+            .background(Color.White)
+            .padding(vertical = 24.dp)
+            .fillMaxWidth(),
           horizontalAlignment = Alignment.CenterHorizontally,
         ) {
           Box(
-            modifier = modifier.clip(CircleShape).background(color = LighterBlue).size(80.dp),
+            modifier = modifier
+              .clip(CircleShape)
+              .background(color = LighterBlue)
+              .size(80.dp),
             contentAlignment = Alignment.Center,
           ) {
             Text(
@@ -194,16 +203,18 @@ fun UserSettingScreen(
       Divider(color = DividerColor)
       Column(modifier = modifier.background(color = colorResource(id = R.color.backgroundGray))) {
         Spacer(
-          modifier = modifier.padding(top = 16.dp).padding(bottom = 16.dp),
+          modifier = modifier
+            .padding(top = 16.dp)
+            .padding(bottom = 16.dp),
         )
         Row {
           Text(
             modifier =
-              modifier
-                .padding(top = 4.dp)
-                .padding(bottom = 8.dp)
-                .padding(start = 20.dp)
-                .fillMaxWidth(),
+            modifier
+              .padding(top = 4.dp)
+              .padding(bottom = 8.dp)
+              .padding(start = 20.dp)
+              .fillMaxWidth(),
             text = stringResource(R.string.settings).uppercase(),
             fontSize = 18.sp,
             color = contentColor,
@@ -231,11 +242,11 @@ fun UserSettingScreen(
       if (allowSwitchingLanguages) {
         Row(
           modifier =
-            modifier
-              .background(Color.White)
-              .fillMaxWidth()
-              .clickable { expanded = true }
-              .padding(vertical = 16.dp, horizontal = 20.dp),
+          modifier
+            .background(Color.White)
+            .fillMaxWidth()
+            .clickable { expanded = true }
+            .padding(vertical = 16.dp, horizontal = 20.dp),
           horizontalArrangement = Arrangement.SpaceBetween,
         ) {
           Row(modifier = Modifier.align(Alignment.CenterVertically)) {
@@ -263,6 +274,7 @@ fun UserSettingScreen(
               modifier = modifier.wrapContentWidth(Alignment.End),
             ) {
               for (language in languages) {
+                Timber.e("Abert Languages: ${language.toString()}")
                 DropdownMenuItem(
                   onClick = {
                     onEvent(
@@ -352,10 +364,10 @@ fun UserSettingScreen(
 
       Column(
         modifier =
-          modifier
-            .background(color = colorResource(id = R.color.backgroundGray))
-            .fillMaxWidth()
-            .padding(top = 16.dp),
+        modifier
+          .background(color = colorResource(id = R.color.backgroundGray))
+          .fillMaxWidth()
+          .padding(top = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
       ) {
         Spacer(modifier = Modifier.weight(1f))
@@ -365,11 +377,11 @@ fun UserSettingScreen(
           "content description",
           colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }),
           modifier =
-            modifier
-              .padding(top = 8.dp)
-              .requiredHeight(32.dp)
-              .align(Alignment.CenterHorizontally)
-              .testTag(OPENSRP_LOGO_TEST_TAG),
+          modifier
+            .padding(top = 8.dp)
+            .requiredHeight(32.dp)
+            .align(Alignment.CenterHorizontally)
+            .testTag(OPENSRP_LOGO_TEST_TAG),
           contentScale = ContentScale.Fit,
         )
 
@@ -377,7 +389,9 @@ fun UserSettingScreen(
           color = contentColor,
           fontSize = 16.sp,
           text = stringResource(id = R.string.app_version, versionCode, versionName),
-          modifier = modifier.padding(top = 8.dp).align(Alignment.CenterHorizontally),
+          modifier = modifier
+            .padding(top = 8.dp)
+            .align(Alignment.CenterHorizontally),
         )
 
         Text(
@@ -385,7 +399,9 @@ fun UserSettingScreen(
           fontSize = 16.sp,
           text = stringResource(id = R.string.last_sync, lastSyncTime ?: ""),
           modifier =
-            modifier.padding(bottom = 12.dp, top = 2.dp).align(Alignment.CenterHorizontally),
+          modifier
+            .padding(bottom = 12.dp, top = 2.dp)
+            .align(Alignment.CenterHorizontally),
         )
       }
     }
@@ -405,11 +421,11 @@ fun UserSettingRow(
 ) {
   Row(
     modifier =
-      modifier
-        .fillMaxWidth()
-        .background(color = colorResource(id = R.color.white))
-        .clickable { clickListener() }
-        .padding(vertical = 16.dp, horizontal = 20.dp),
+    modifier
+      .fillMaxWidth()
+      .background(color = colorResource(id = R.color.white))
+      .clickable { clickListener() }
+      .padding(vertical = 16.dp, horizontal = 20.dp),
     horizontalArrangement = Arrangement.SpaceBetween,
   ) {
     Row {
@@ -428,7 +444,10 @@ fun UserSettingRow(
     if (showProgressIndicator) {
       CircularProgressIndicator(
         modifier =
-          modifier.size(18.dp).testTag(CIRCULAR_PROGRESS_INDICATOR).wrapContentWidth(Alignment.End),
+        modifier
+          .size(18.dp)
+          .testTag(CIRCULAR_PROGRESS_INDICATOR)
+          .wrapContentWidth(Alignment.End),
         strokeWidth = 1.6.dp,
       )
     }
@@ -454,18 +473,24 @@ fun ConfirmClearDatabaseDialog(
     text = { Text(text = stringResource(R.string.clear_database_message), fontSize = 16.sp) },
     buttons = {
       Row(
-        modifier = modifier.fillMaxWidth().padding(vertical = 20.dp),
+        modifier = modifier
+          .fillMaxWidth()
+          .padding(vertical = 20.dp),
         horizontalArrangement = Arrangement.End,
       ) {
         Text(
           text = stringResource(R.string.cancel),
-          modifier = modifier.padding(horizontal = 10.dp).clickable { onDismissDialog() },
+          modifier = modifier
+            .padding(horizontal = 10.dp)
+            .clickable { onDismissDialog() },
         )
         Text(
           color = MaterialTheme.colors.primary,
           text = stringResource(R.string.clear_database).uppercase(),
           modifier =
-            modifier.padding(horizontal = 10.dp).clickable {
+          modifier
+            .padding(horizontal = 10.dp)
+            .clickable {
               permanentResetDatabase()
               onDismissDialog()
             },
@@ -486,7 +511,7 @@ fun UserSettingPreview() {
     practitionerLocation = "Gateway Remote Location",
     allowSwitchingLanguages = true,
     selectedLanguage = java.util.Locale.ENGLISH.toLanguageTag(),
-    languages = listOf(Language("en", "English"), Language("sw", "Swahili")),
+    languages = listOf(Language("en", "English"), Language("sw", "Swahili"), Language("ukr","Ukrainian")),
     showDatabaseResetConfirmation = false,
     progressBarState = Pair(false, R.string.resetting_app),
     isDebugVariant = true,

@@ -393,7 +393,7 @@ fun AppDrawerPreview() {
         username = "Demo",
         lastSyncTime = "05:30 PM, Mar 3",
         currentLanguage = "English",
-        languages = listOf(Language("en", "English"), Language("sw", "Swahili")),
+        languages = listOf(Language("en", "English"), Language("sw", "Swahili"),Language("ukr","Ukrainian")),
         navigationConfiguration =
           NavigationConfiguration(
             appId = "appId",
