@@ -1,0 +1,155 @@
+{
+  "resourceType": "Composition",
+  "id": "23",
+  "meta": {
+    "versionId": "20",
+    "lastUpdated": "2024-02-28T12:43:09.836+03:00",
+    "source": "#Iyu4IOZL4j7u5YmS"
+  },
+  "identifier": {
+    "use": "official",
+    "value": "cliff"
+  },
+  "status": "final",
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "1156600005",
+        "display": "Device setting parameter"
+      }
+    ]
+  },
+  "date": "2022-07-28",
+  "title": "Device configurations",
+  "confidentiality": "L",
+  "section": [
+    {
+      "title": "Application configuration",
+      "focus": {
+        "reference": "Binary/24",
+        "identifier": {
+          "value": "application"
+        }
+      },
+      "mode": "working"
+    },
+    {
+      "title": "Sync configuration",
+      "focus": {
+        "reference": "Binary/2",
+        "identifier": {
+          "value": "sync"
+        }
+      },
+      "mode": "working"
+    },
+    {
+      "title": "Navigation configuration",
+      "focus": {
+        "reference": "Binary/13",
+        "identifier": {
+          "value": "navigation"
+        }
+      },
+      "mode": "working"
+    },
+    {
+      "title": "Register configurations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Patient register configuration",
+          "focus": {
+            "reference": "Binary/63",
+            "identifier": {
+              "value": "patientRegister"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Profile configurations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Patient profile configuration",
+          "focus": {
+            "reference": "Binary/66",
+            "identifier": {
+              "value": "patientProfile"
+            }
+          }
+        },
+        {
+          "title": "Default profile configuration",
+          "focus": {
+            "reference": "Binary/6",
+            "identifier": {
+              "value": "defaultProfile"
+            }
+          }
+        },
+        {
+          "title": "Other Registers profile configuration",
+          "focus": {
+            "reference": "Binary/7",
+            "identifier": {
+              "value": "otherRegistersProfile"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Translation configurations",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Translation English",
+          "focus": {
+            "reference": "Binary/8",
+            "identifier": {
+              "value": "strings"
+            }
+          }
+        },
+        {
+          "title": "Translation Swahili",
+          "focus": {
+            "reference": "Binary/9",
+            "identifier": {
+              "value": "strings_sw"
+            }
+          }
+        },
+        {
+          "title": "Translation Ukrainian",
+          "focus": {
+            "reference": "Binary/72",
+            "identifier": {
+              "value": "strings_ukr"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "title": "Questionnaires",
+      "mode": "working",
+      "section": [
+        {
+          "title": "Register patient",
+          "focus": {
+            "reference": "Questionnaire/75",
+            "identifier": {
+              "value": "patient-registration"
+            }
+          },
+          "mode": "working"
+        }
+      ]
+    }
+  ]
+}

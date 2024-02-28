@@ -1,0 +1,98 @@
+{
+  "appId": "app",
+  "configType": "navigation",
+  "menuActionButton": {
+    "id": "mainActionButton",
+    "visible": true,
+    "display": "Add Index Client",
+    "actions": [
+      {
+        "trigger": "ON_CLICK",
+        "workflow": "LAUNCH_QUESTIONNAIRE",
+        "questionnaire": {
+          "id": "75",
+          "title": "Add Index Client",
+          "saveButtonText": "Add Index Client",
+          "setPractitionerDetails": true,
+          "setOrganizationDetails": true
+        }
+      }
+    ]
+  },
+  "clientRegisters": [
+    {
+      "id": "patientRegister",
+      "display": "All Index Clients",
+      "showCount": true,
+      "menuIconConfig": {
+        "type": "local",
+        "reference": "ic_households"
+      },
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_REGISTER",
+          "id": "patientRegister"
+        },
+        {
+          "trigger": "ON_COUNT",
+          "id": "patientRegister"
+        }
+      ]
+    }
+  ],
+  "staticMenu": [
+    {
+      "id": "taskRegister",
+      "display": "Task Register",
+      "showCount": true,
+      "menuIconConfig": {
+        "type": "local",
+        "reference": "ic_tasks_priority"
+      },
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_REGISTER",
+          "id": "taskRegister"
+        },
+        {
+          "trigger": "ON_COUNT",
+          "id": "taskRegister"
+        }
+      ]
+    },
+    {
+      "id": "practitionerReports",
+      "visible": true,
+      "display": "Practitioner Reports",
+      "menuIconConfig": {
+        "type": "local",
+        "reference": "ic_reports"
+      },
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_REPORT",
+          "id": "practitionerMeasureReport"
+        }
+      ]
+    },
+    {
+      "id": "settings",
+      "visible": true,
+      "display": "Settings",
+      "menuIconConfig": {
+        "type": "local",
+        "reference": "ic_settings"
+      },
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_SETTINGS",
+          "id": "navigateToSettingsScreen"
+        }
+      ]
+    }
+  ]
+}
