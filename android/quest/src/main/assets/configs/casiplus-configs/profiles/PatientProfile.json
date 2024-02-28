@@ -1,0 +1,120 @@
+{
+  "appId": "app",
+  "configType": "profile",
+  "id": "patientProfile",
+  "fhirResource": {
+    "baseResource": {
+      "resource": "Patient"
+    },
+    "relatedResources": [
+      {
+        "resource": "Immunization",
+        "searchParameter": "patient"
+      }
+    ]
+  },
+  "secondaryResources": [
+    {
+      "baseResource": {
+        "id": "commodities",
+        "resource": "Group",
+        "dataQueries": [
+          {
+            "paramName": "code",
+            "filterCriteria": [
+              {
+                "dataType": "CODEABLECONCEPT",
+                "value": {
+                  "system": "http://snomed.info/sct",
+                  "code": "386452003"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "relatedResources": [
+        {
+          "id": "latestObservations",
+          "resource": "Observation",
+          "searchParameter": "subject",
+          "dataQueries": [
+            {
+              "paramName": "_tag",
+              "filterCriteria": [
+                {
+                  "dataType": "CODING",
+                  "value": {
+                    "code": "latest"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "rules": [
+    {
+      "name": "patientName",
+      "condition": "true",
+      "actions": [
+        "data.put('patientName', fhirPath.extractValue(Patient, \"Patient.name.select(given + ' ' + family)\"))"
+      ]
+    },
+    {
+      "name": "gender",
+      "condition": "true",
+      "actions": [
+        "data.put('patientGender', service.extractGender(Patient))"
+      ]
+    },
+    {
+      "name": "patientDOB",
+      "condition": "true",
+      "actions": [
+        "data.put('patientDOB', service.extractDOB(Patient, 'dd MM'))"
+      ]
+    },
+    {
+      "name": "patientAge",
+      "condition": "true",
+      "actions": [
+        "data.put('patientAge', service.extractAge(Patient))"
+      ]
+    }
+  ],
+  "views": [
+    {
+      "viewType": "COLUMN",
+      "children": [
+        {
+          "viewType": "CARD",
+          "padding": 0,
+          "content": [
+            {
+              "viewType": "COLUMN",
+              "children": [
+                {
+                  "viewType": "COMPOUND_TEXT",
+                  "primaryText": "@{patientName}",
+                  "primaryTextColor": "#000000"
+                },
+                {
+                  "viewType": "COMPOUND_TEXT",
+                  "primaryText": "Date Of Birth: @{patientDOB}",
+                  "primaryTextColor": "#000000"
+                }
+              ]
+            },
+            {
+              "viewType": "SPACER",
+              "height": 16
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

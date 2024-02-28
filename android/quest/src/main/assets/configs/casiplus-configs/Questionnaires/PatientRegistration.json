@@ -1,0 +1,279 @@
+{
+  "resourceType": "Questionnaire",
+  "id": "75",
+  "meta": {
+    "versionId": "13",
+    "lastUpdated": "2024-02-27T17:02:15.918+03:00",
+    "source": "#o2LYeIUYYJj9t8Cl"
+  },
+  "language": "en",
+  "extension": [
+    {
+      "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemExtractionContext",
+      "valueExpression": {
+        "name": "patient",
+        "language": "application/x-fhir-query",
+        "expression": "Patient"
+      }
+    }
+  ],
+  "status": "active",
+  "subjectType": [
+    "Patient"
+  ],
+  "date": "2020-11-18T07:24:47.111Z",
+  "item": [
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "name": "patientBirthDate",
+            "language": "text/fhirpath",
+            "expression": "Patient.identifier.value"
+          }
+        }
+      ],
+      "linkId": "patient-identifier",
+      "definition": "hhttp://hl7.org/fhir/StructureDefinition/Patient#Patient.identifier.value",
+      "text": "IS SSD identification number",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Ідентифікаційний номер IS SSD"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "string"
+    },
+    {
+      "linkId": "appointment-date",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Appointment#Appointment.created",
+      "text": "What is today’s date",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Яка сьогодні дата"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "date",
+      "required": true
+    },
+    {
+      "linkId": "verbal-consent",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Appointment#Appointment.note",
+      "text": "Has the index client provided verbal consent to participate in index testing services?",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Чи надав клієнт індексу усну згоду на участь у послугах тестування індексу?"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "boolean"
+    },
+    {
+      "linkId": "written-consent",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Appointment#Appointment.note",
+      "text": "Has the index client provided written consent to participate in the CASI-Plus study?",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Чи надав клієнт індексу письмову згоду на участь у дослідженні CASI-Plus?"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "boolean"
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "name": "patientBirthDate",
+            "language": "text/fhirpath",
+            "expression": "Patient.birthDate"
+          }
+        }
+      ],
+      "linkId": "patient-0-birth-date",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.birthDate",
+      "text": "What is the index client’s date of birth?",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Яка дата народження клієнта індексу?"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "date",
+      "required": true
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-itemContext",
+          "valueExpression": {
+            "name": "administrativeGender",
+            "language": "application/x-fhir-query",
+            "expression": "Enumerations$AdministrativeGender"
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-itemControl",
+          "valueCodeableConcept": {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/questionnaire-item-control",
+                "code": "radio-button",
+                "display": "Radio Button"
+              }
+            ]
+          }
+        },
+        {
+          "url": "http://hl7.org/fhir/StructureDefinition/questionnaire-choiceOrientation",
+          "valueCode": "horizontal"
+        },
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "name": "patientGender",
+            "language": "text/fhirpath",
+            "expression": "Patient.gender"
+          }
+        }
+      ],
+      "linkId": "patient-0-gender",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.gender",
+      "text": "What is the index client’s sex?",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Яка стать клієнта індексу?"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "choice",
+      "answerOption": [
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "male",
+            "display": "Male"
+          }
+        },
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "female",
+            "display": "Female"
+          }
+        }
+      ],
+      "initial": [
+        {
+          "valueCoding": {
+            "system": "http://hl7.org/fhir/administrative-gender",
+            "code": "male",
+            "display": "Male"
+          }
+        }
+      ]
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "name": "patientActive",
+            "language": "text/fhirpath",
+            "expression": "Patient.active"
+          }
+        }
+      ],
+      "linkId": "PR-active",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.active",
+      "text": "Is Active?",
+      "_text": {
+        "extension": [
+          {
+            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+            "extension": [
+              {
+                "url": "lang",
+                "valueCode": "ukr"
+              },
+              {
+                "url": "content",
+                "valueString": "Чи активний?"
+              }
+            ]
+          }
+        ]
+      },
+      "type": "boolean"
+    }
+  ]
+}
