@@ -59,27 +59,6 @@
   ],
   "rules": [
     {
-      "name": "patientFirstName",
-      "condition": "true",
-      "actions": [
-        "data.put('patientFirstName', fhirPath.extractValue(Patient, \"Patient.name[0].select(given[0])\"))"
-      ]
-    },
-    {
-      "name": "patientLastName",
-      "condition": "true",
-      "actions": [
-        "data.put('patientLastName', fhirPath.extractValue(Patient, \"Patient.name[0].select(family)\"))"
-      ]
-    },
-    {
-      "name": "patientName",
-      "condition": "true",
-      "actions": [
-        "data.put('patientName', data.get('patientFirstName') + ' ' +  ' ' + data.get('patientLastName'))"
-      ]
-    },
-    {
       "name": "patientActive",
       "condition": "true",
       "actions": [
@@ -97,7 +76,7 @@
       "name": "patientId",
       "condition": "true",
       "actions": [
-        "data.put('patientId', fhirPath.extractValue(Patient, 'Patient.id'))"
+        "data.put('patientId', fhirPath.extractValue(Patient, 'Patient.identifier[1].value'))"
       ]
     },
     {
@@ -170,12 +149,12 @@
               "children": [
                 {
                   "viewType": "COMPOUND_TEXT",
-                  "primaryText": "@{patientName}",
+                  "primaryText": "ID: @{patientId}",
                   "primaryTextColor": "#000000"
                 },
                 {
                   "viewType": "COMPOUND_TEXT",
-                  "primaryText": "ID: #000121",
+                  "primaryText": "INDEX CLIENT",
                   "primaryTextColor": "#000000"
                 },
                 {
@@ -240,6 +219,205 @@
           "header": {
             "viewType": "COMPOUND_TEXT",
             "primaryText": "VISITS",
+            "primaryTextColor": "#6F7274",
+            "fontSize": 18,
+            "padding": 16
+          },
+          "content": [
+            {
+              "viewType": "LIST",
+              "resources": [
+                {
+                  "id": "tasks",
+                  "relatedResourceId": "Task",
+                  "resourceType": "Task"
+                }
+              ],
+              "registerCard": {
+                "rules": [
+                  {
+                    "name": "taskStatus",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskStatus', fhirPath.extractValue(Task, 'Task.status'))"
+                    ]
+                  },
+                  {
+                    "name": "taskExecutionStartDate",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskExecutionStartDate', fhirPath.extractValue(Task, 'Task.executionPeriod.start'))"
+                    ]
+                  },
+                  {
+                    "name": "taskPeriodDueDate",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskPeriodDueDate', service.formatDate(data.get('taskExecutionStartDate'), \"yyyy-MM-dd'T'HH:mm:ss.SSS'Z'\", \"dd MMM yyyy\"))"
+                    ]
+                  },
+                  {
+                    "name": "taskDescription",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskDescription', fhirPath.extractValue(Task, 'Task.description'))"
+                    ]
+                  },
+                  {
+                    "name": "taskDescriptionWithStartDate",
+                    "condition": "true",
+                    "priority": 2,
+                    "actions": [
+                      "data.put('taskDescriptionWithStartDate', data.get('taskDescription') + ' ' + 'due on' + ' ' + data.get('taskPeriodDueDate'))"
+                    ]
+                  },
+                  {
+                    "name": "taskId",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskId', fhirPath.extractValue(Task, 'Task.id'))"
+                    ]
+                  },
+                  {
+                    "name": "taskFor",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskFor', fhirPath.extractValue(Task, 'Task.for.reference'))"
+                    ]
+                  },
+                  {
+                    "name": "taskQuestionnaireId",
+                    "condition": "true",
+                    "actions": [
+                      "data.put('taskQuestionnaireId', fhirPath.extractValue(Task, 'Task.reasonReference.reference'))"
+                    ]
+                  }
+                ],
+                "views": [
+                  {
+                    "viewType": "BUTTON",
+                    "text": "taskDescriptionWithStartDate",
+                    "status": "#2d6387",
+                    "visible": "true",
+                    "enabled": "true",
+                    "actions": [
+                      {
+                        "trigger": "ON_CLICK",
+                        "workflow": "LAUNCH_QUESTIONNAIRE",
+                        "questionnaire": {
+                          "id": "34343434",
+                          "title": "taskDescription",
+                          "saveButtonText": "Save"
+                        },
+                        "params": [
+                          {
+                            "paramType": "QUESTIONNAIRE_RESPONSE_POPULATION_RESOURCE",
+                            "resourceType": "Patient",
+                            "value": "patientId",
+                            "key": "resourcePatient",
+                            "dataType": "STRING"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewType": "BUTTON",
+      "text": "View first partner elicitation interview",
+      "status": "#2d6387",
+      "visible": "true",
+      "enabled": "true",
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_QUESTIONNAIRE",
+          "questionnaire": {
+            "id": "34343434",
+            "title": "taskDescription",
+            "saveButtonText": "Save"
+          },
+          "params": [
+            {
+              "paramType": "QUESTIONNAIRE_RESPONSE_POPULATION_RESOURCE",
+              "resourceType": "Patient",
+              "value": "patientId",
+              "key": "resourcePatient",
+              "dataType": "STRING"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewType": "BUTTON",
+      "text": "Launch follow-up interview",
+      "status": "#2d6387",
+      "visible": "true",
+      "enabled": "true",
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_QUESTIONNAIRE",
+          "questionnaire": {
+            "id": "34343434",
+            "title": "taskDescription",
+            "saveButtonText": "Save"
+          },
+          "params": [
+            {
+              "paramType": "QUESTIONNAIRE_RESPONSE_POPULATION_RESOURCE",
+              "resourceType": "Patient",
+              "value": "patientId",
+              "key": "resourcePatient",
+              "dataType": "STRING"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewType": "BUTTON",
+      "text": "View IS SSD client Summary",
+      "status": "#2d6387",
+      "visible": "true",
+      "enabled": "true",
+      "actions": [
+        {
+          "trigger": "ON_CLICK",
+          "workflow": "LAUNCH_QUESTIONNAIRE",
+          "questionnaire": {
+            "id": "34343434",
+            "title": "taskDescription",
+            "saveButtonText": "Save"
+          },
+          "params": [
+            {
+              "paramType": "QUESTIONNAIRE_RESPONSE_POPULATION_RESOURCE",
+              "resourceType": "Patient",
+              "value": "patientId",
+              "key": "resourcePatient",
+              "dataType": "STRING"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "viewType": "COLUMN",
+      "children": [
+        {
+          "viewType": "CARD",
+          "padding": 16,
+          "header": {
+            "viewType": "COMPOUND_TEXT",
+            "primaryText": "Partners",
             "primaryTextColor": "#6F7274",
             "fontSize": 18,
             "padding": 16

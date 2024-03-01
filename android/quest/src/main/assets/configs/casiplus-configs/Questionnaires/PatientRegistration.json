@@ -28,33 +28,65 @@
         {
           "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
           "valueExpression": {
-            "name": "patientBirthDate",
+            "name": "patientIdentifier1",
             "language": "text/fhirpath",
-            "expression": "Patient.identifier.value"
+            "expression": "Patient.identifier"
           }
         }
       ],
-      "linkId": "patient-identifier",
-      "definition": "hhttp://hl7.org/fhir/StructureDefinition/Patient#Patient.identifier.value",
-      "text": "IS SSD identification number",
-      "_text": {
-        "extension": [
-          {
-            "url": "http://hl7.org/fhir/StructureDefinition/translation",
+      "linkId": "patient-identifier1",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.identifier",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "ssdId",
+          "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.identifier.value",
+          "text": "IS SSD identification number",
+          "type": "string",
+          "_text": {
             "extension": [
               {
-                "url": "lang",
-                "valueCode": "ukr"
-              },
-              {
-                "url": "content",
-                "valueString": "Ідентифікаційний номер IS SSD"
+                "url": "http://hl7.org/fhir/StructureDefinition/translation",
+                "extension": [
+                  {
+                    "url": "lang",
+                    "valueCode": "ukr"
+                  },
+                  {
+                    "url": "content",
+                    "valueString": "Ідентифікаційний номер IS SSD"
+                  }
+                ]
               }
             ]
           }
-        ]
-      },
-      "type": "string"
+        }
+      ]
+
+    },
+    {
+      "extension": [
+        {
+          "url": "http://hl7.org/fhir/uv/sdc/StructureDefinition/sdc-questionnaire-initialExpression",
+          "valueExpression": {
+            "name": "patientIdentifier2",
+            "language": "text/fhirpath",
+            "expression": "Patient.identifier"
+          }
+        }
+      ],
+      "linkId": "patient-identifier2",
+      "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.identifier",
+      "type": "group",
+      "item": [
+        {
+          "linkId": "casiPlus",
+          "definition": "http://hl7.org/fhir/StructureDefinition/Patient#Patient.identifier.value",
+          "text": "Casi Plus ID",
+          "type": "string"
+        }
+      ]
+
     },
     {
       "linkId": "appointment-date",

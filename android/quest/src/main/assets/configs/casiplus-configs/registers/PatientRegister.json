@@ -2,6 +2,7 @@
   "appId": "app",
   "configType": "register",
   "id": "patientRegister",
+  "pageSize": 100,
   "fhirResource": {
     "baseResource": {
       "resource": "Patient"
@@ -95,7 +96,7 @@
     "display": "Search name or ID",
     "computedRules": [
       "patientName",
-      "patientId"
+      "patientIdentifier"
     ]
   },
   "registerCard": {
@@ -104,7 +105,14 @@
         "name": "patientId",
         "condition": "true",
         "actions": [
-          "data.put('patientId', fhirPath.extractValue(Patient, 'Patient.identifier[0].value'))"
+          "data.put('patientId', fhirPath.extractValue(Patient, 'Patient.id'))"
+        ]
+      },
+      {
+        "name": "patientIdentifier",
+        "condition": "true",
+        "actions": [
+          "data.put('patientIdentifier', fhirPath.extractValue(Patient, 'Patient.identifier[1].value'))"
         ]
       },
       {
@@ -127,13 +135,6 @@
         "actions": [
           "data.put('patientAge', service.extractAge(Patient))"
         ]
-      },
-      {
-        "name": "humanReadableId",
-        "condition": "true",
-        "actions": [
-          "data.put('humanReadableId', service.generateRandomSixDigitInt())"
-        ]
       }
     ],
     "views": [
@@ -145,7 +146,7 @@
             "details": [
               {
                 "viewType": "COMPOUND_TEXT",
-                "primaryText": "@{humanReadableId}",
+                "primaryText": "@{patientIdentifier}",
                 "primaryTextColor": "#000000"
               },
               {
