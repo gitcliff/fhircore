@@ -4,17 +4,17 @@
   "menuActionButton": {
     "id": "mainActionButton",
     "visible": true,
-    "display": "Add Index Client",
+    "display": "Client Interview",
     "actions": [
       {
         "trigger": "ON_CLICK",
         "workflow": "LAUNCH_QUESTIONNAIRE",
         "questionnaire": {
-          "id": "75",
-          "title": "Add Index Client",
-          "saveButtonText": "Add Index Client",
-          "setPractitionerDetails": true,
-          "setOrganizationDetails": true
+          "id": "354545",
+          "title": "Client Interview",
+          "saveButtonText": "Client Interview",
+          "setPractitionerDetails": false,
+          "setOrganizationDetails": false
         }
       }
     ]
